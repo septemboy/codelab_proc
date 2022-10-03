@@ -20,3 +20,20 @@ $(document).ready(function () {
     $("#listUser").append('<a href="#" class="list-group-item list-group-item-action"> Random : '+ val +'</a>');
   }
   //Work exercise,Insert code here
+  $('#btnSendMsg').click( function(){
+         var socket = io('http://localhost:3000');
+         console.log("SendMsg");
+
+         data_input = { "msg": $('#txtMessage').val(), "name": $('#txtName').val()};
+
+         socket.emit('joidRoom', data_input, function (data) {
+                console.log('sent message to server!');
+                console.log(data);
+                //
+                Swal.fire({
+                    title: 'ขอบคุณที่บอกฉัน',
+                    text: data,
+                })
+        });
+
+    });
